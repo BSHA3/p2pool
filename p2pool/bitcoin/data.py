@@ -1,6 +1,7 @@
 from __future__ import division
 
 import hashlib
+import sha3
 import random
 import warnings
 
@@ -8,15 +9,13 @@ import p2pool
 from p2pool.util import math, pack
 
 def hash256(data):
-    return pack.IntType(256).unpack(hashlib.sha256(hashlib.sha256(data).digest()).digest())
+    return pack.IntType(256).unpack(hashlib.sha3_256(hashlib.sha3_256(data).digest()).digest())
 
 def hash160(data):
-    if data == '04ffd03de44a6e11b9917f3a29f9443283d9871c9d743ef30d5eddcd37094b64d1b3d8090496b53256786bf5c82932ec23c3b74d9f05a6f95a8b5529352656664b'.decode('hex'):
-        return 0x384f570ccc88ac2e7e00b026d1690a3fca63dd0 # hack for people who don't have openssl - this is the only value that p2pool ever hashes
-    return pack.IntType(160).unpack(hashlib.new('ripemd160', hashlib.sha256(data).digest()).digest())
+    return pack.IntType(160).unpack(hashlib.new('ripemd160', hashlib.sha3_256(data).digest()).digest())
 
 class ChecksummedType(pack.Type):
-    def __init__(self, inner, checksum_func=lambda data: hashlib.sha256(hashlib.sha256(data).digest()).digest()[:4]):
+    def __init__(self, inner, checksum_func=lambda data: hashlib.sha3_256(hashlib.sha3_256(data).digest()).digest()[:4]):
         self.inner = inner
         self.checksum_func = checksum_func
     

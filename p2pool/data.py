@@ -37,7 +37,7 @@ def check_hash_link(hash_link, data, const_ending=''):
     assert len(hash_link['extra_data']) == max(0, extra_length - len(const_ending))
     extra = (hash_link['extra_data'] + const_ending)[len(hash_link['extra_data']) + len(const_ending) - extra_length:]
     assert len(extra) == extra_length
-    return pack.IntType(256).unpack(hashlib.sha256(sha256.sha256(data, (hash_link['state'], extra, 8*hash_link['length'])).digest()).digest())
+    return pack.IntType(256).unpack(hashlib.sha3_256(sha256.sha256(data, (hash_link['state'], extra, 8*hash_link['length'])).digest()).digest())
 
 # shares
 
