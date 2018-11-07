@@ -14,11 +14,11 @@ TARGET_LOOKBEHIND = 200 # shares
 SPREAD = 3 # blocks
 IDENTIFIER = 'fc70035c7a81bc6f'.decode('hex')
 PREFIX = '2472ef181efcd37b'.decode('hex')
-P2P_PORT = 9333
+P2P_PORT = 9335
 MIN_TARGET = 0
 MAX_TARGET = 2**256//2**32 - 1
 PERSIST = True
-WORKER_PORT = 9332
+WORKER_PORT = 9334
 BOOTSTRAP_ADDRS = [] #''.split(' ')
 ANNOUNCE_CHANNEL = '#p2pool'
 VERSION_CHECK = lambda v: None if 100000 <= v else 'Bitcoin version too old. Upgrade to 0.11.2 or newer!' # not a bug. BIP65 support is ensured by SOFTFORKS_REQUIRED
